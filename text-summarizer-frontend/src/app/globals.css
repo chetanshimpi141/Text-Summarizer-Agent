@@ -24,3 +24,17 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Make radio/checkbox labels always black */
+label {
+  color: #000 !important;
+}
+
+/* Make enabled dropdown text black, disabled grey */
+select {
+  color: #000;
+}
+select:disabled {
+  color: #888;
+  background: #f5f5f5;
+}

@@ -6,7 +6,6 @@ export async function POST(request: NextRequest) {
   try {
     // Add debugging to see what's being received
     const requestBody = await request.text();
-    console.log('Received request body:', requestBody);
     
     if (!requestBody) {
       return NextResponse.json(
@@ -34,11 +33,11 @@ export async function POST(request: NextRequest) {
     // Path to the Python script
     const pythonScriptPath = path.join(process.cwd(), '..', 'summarizer.py');
 
-    // Get the API key from environment
-    const apiKey = process.env.OPENAI_API_KEY;
+    // Get the Gemini API key from environment
+    const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
       return NextResponse.json(
-        { error: 'OpenAI API key not configured. Please set OPENAI_API_KEY environment variable.' },
+        { error: 'Gemini API key not configured. Please set GEMINI_API_KEY environment variable.' },
         { status: 500 }
       );
     }
@@ -47,7 +46,7 @@ export async function POST(request: NextRequest) {
     const pythonProcess = spawn('python', [pythonScriptPath, tempFile], {
       env: {
         ...process.env,
-        OPENAI_API_KEY: apiKey
+        GEMINI_API_KEY: apiKey
       }
     });
 
@@ -102,4 +101,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
-} 
+}
